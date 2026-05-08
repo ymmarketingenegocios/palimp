@@ -1,1 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PALIMP | Mídia Kit Digital</title>
+  <meta name="description" content="Mídia kit digital da banda PALIMP — show de clássicos dos anos 90 e 2000 para bares, pubs, casas de show e eventos." />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #050505;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    img, iframe {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :root {
+      --bg: #050505;
+      --bg-soft: #101014;
+      --card: #16161d;
+      --text: #ffffff;
+      --muted: #b8b8c7;
+      --purple: #8b5cf6;
+      --blue: #38bdf8;
+      --pink: #d946ef;
+      --border: rgba(255,255,255,0.12);
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #e8e8ff;
+      background: rgba(139, 92, 246, 0.14);
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      box-shadow: 0 15px 40px rgba(139, 92, 246, 0.28);
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 60px rgba(56, 189, 248, 0.32);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(5,5,5,0.72);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 120px 0 72px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.28), transparent 35%),
+        radial-gradient(circle at 80% 30%, rgba(56, 189, 248, 0.18), transparent 30%),
+        linear-gradient(180deg, #050505 0%, #0d0d12 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('assets/hero-palimp.jpg') center/cover no-repeat;
+      opacity: 0.24;
+      filter: grayscale(10%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(5,5,5,0.94) 0%, rgba(5,5,5,0.74) 48%, rgba(5,5,5,0.92) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #dedeee;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      max-width: 640px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .video-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 14px;
+      box-shadow: 0 25px 90px rgba(0,0,0,0.45);
+    }
+
+    .video-frame {
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .video-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Cards */
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035));
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 26px;
+    }
+
+    .card h3 {
+      font-size: 1.28rem;
+      margin-bottom: 10px;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(139, 92, 246, 0.16);
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .proof .video-frame {
+      min-height: 190px;
+    }
+
+    .proof-label {
+      margin-top: 12px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .about-image {
+      min-height: 440px;
+      border-radius: 32px;
+      background: url('assets/show-palimp.jpg') center/cover no-repeat;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.7));
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .bullet-list li {
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: #eeeeff;
+    }
+
+    .venues {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .venue {
+      padding: 24px 18px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .venue span {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 4px;
+      font-size: 0.9rem;
+    }
+
+    .format-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .format-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 90% 10%, rgba(56,189,248,0.18), transparent 32%);
+      pointer-events: none;
+    }
+
+    .format-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      grid-auto-rows: 240px;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: #111 center/cover no-repeat;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item:nth-child(1) { background-image: url('assets/galeria-1.jpg'); grid-row: span 2; }
+    .gallery-item:nth-child(2) { background-image: url('assets/galeria-2.jpg'); }
+    .gallery-item:nth-child(3) { background-image: url('assets/galeria-3.jpg'); }
+    .gallery-item:nth-child(4) { background-image: url('assets/galeria-4.jpg'); grid-column: span 2; }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.45));
+    }
+
+    .cta-final {
+      text-align: center;
+      padding: 90px 24px;
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.34), transparent 35%),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+    }
+
+    .cta-final h2 {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .cta-final p {
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+    }
+
+    .contact-info {
+      margin-top: 24px;
+      color: var(--muted);
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .footer {
+      padding: 32px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 920px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-content,
+      .about-wrap,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .venues {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 260px;
+      }
+
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) {
+        grid-row: auto;
+        grid-column: auto;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header fixo para facilitar navegação rápida -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#top" class="brand">PALIMP<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#prova">Vídeos</a>
+        <a href="#show">O show</a>
+        <a href="#formatos">Formatos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="btn" href="https://wa.me/5531973137876?text=Quero%20contratar%20a%20banda" target="_blank" rel="noopener">Contratar</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO: primeira dobra com foco em decisão rápida -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div>
+          <div class="tag">Mídia kit digital • BH e região</div>
+          <h1>O show dos anos 90 onde o público <span>canta do começo ao fim</span></h1>
+          <p>Clássicos do rock alternativo e pop rock dos anos 90 e 2000 para lotar, engajar e manter o público no bar.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://wa.me/5531973137876?text=Quero%20contratar%20a%20banda" target="_blank" rel="noopener">📩 Contratar a banda</a>
+            <a class="btn secondary" href="#prova">🎥 Ver vídeos</a>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-frame">
+            <!-- Troque VIDEO_ID pelo ID do vídeo do YouTube -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=1" title="Vídeo PALIMP ao vivo" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVA: seção mais importante para conversão -->
+    <section class="section proof" id="prova">
+      <div class="container">
+        <div class="tag">Prova em vídeo</div>
+        <h2 class="section-title">Veja o que acontece quando a banda sobe no palco</h2>
+        <p class="section-subtitle">Use esta seção para colocar os melhores cortes: público cantando, casa cheia, refrões conhecidos e momentos de alta energia.</p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Público cantando" allowfullscreen></iframe>
+            </div>
+            <div class="proof-label">Público cantando junto</div>
+          </div>
+
+          <div class="card">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Energia do show" allowfullscreen></iframe>
+            </div>
+            <div class="proof-label">Energia de palco</div>
+          </div>
+
+          <div class="card">
+            <div class="video-frame">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Casa cheia" allowfullscreen></iframe>
+            </div>
+            <div class="proof-label">Show em pub/casa de show</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE O SHOW: texto curto, direto e vendedor -->
+    <section class="section" id="show">
+      <div class="container about-wrap">
+        <div class="about-image" aria-label="PALIMP ao vivo"></div>
+        <div>
+          <div class="tag">O show</div>
+          <h2 class="section-title">Rock 90/2000 com repertório conhecido e clima de nostalgia</h2>
+          <p class="section-subtitle">O PALIMP apresenta um show de clássicos do rock alternativo e pop rock, com músicas que o público reconhece rápido, canta junto e permanece conectado do início ao fim.</p>
+
+          <ul class="bullet-list">
+            <li>🎶 Repertório com Alanis Morissette, The Cranberries, Garbage, No Doubt, Radiohead, Muse, Pixies, Silverchair, 4 Non Blondes e releituras nacionais.</li>
+            <li>🔥 Show energético, envolvente e pensado para criar conexão imediata com o público.</li>
+            <li>🍻 Ideal para bares, pubs, casas de show, eventos particulares e programação temática.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAIS: visual e direto -->
+    <section class="section">
+      <div class="container">
+        <div class="tag">Por que funciona no bar?</div>
+        <h2 class="section-title">Diferenciais que ajudam a vender mais que música</h2>
+        <p class="section-subtitle">A contratação não é só por repertório. É pela experiência que prende o público e cria uma noite memorável.</p>
+
+        <div class="grid grid-4">
+          <div class="card">
+            <div class="icon">🎤</div>
+            <h3>Vocal feminino marcante</h3>
+            <p>Presença forte para interpretar clássicos de Alanis, Cranberries, Garbage e No Doubt.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🎶</div>
+            <h3>Repertório fora do óbvio</h3>
+            <p>Clássicos conhecidos, mas com uma seleção que diferencia a noite da programação comum.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔥</div>
+            <h3>Público canta junto</h3>
+            <p>Refrões fortes, memória afetiva e músicas que geram participação real do público.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🎸</div>
+            <h3>Energia de palco</h3>
+            <p>Show com presença, entrega e consistência sonora para manter o ambiente vivo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVA SOCIAL: locais onde já tocaram -->
+    <section class="section">
+      <div class="container">
+        <div class="tag">Prova social</div>
+        <h2 class="section-title">Onde o PALIMP já se apresentou</h2>
+        <p class="section-subtitle">Referências de pubs, bares e casas de show em Belo Horizonte e região.</p>
+
+        <div class="venues">
+          <div class="venue">XBK <span>Belo Horizonte/MG</span></div>
+          <div class="venue">Woodstock Rock Bar <span>Sete Lagoas/MG</span></div>
+          <div class="venue">Original Pub <span>Belo Horizonte/MG</span></div>
+          <div class="venue">King Pub <span>Betim/MG</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMATOS: ajuda a ampliar possibilidade de contratação -->
+    <section class="section" id="formatos">
+      <div class="container">
+        <div class="tag">Formatos de contratação</div>
+        <h2 class="section-title">Do bar menor à casa cheia: escolha o formato ideal</h2>
+        <p class="section-subtitle">A banda pode ser apresentada em formatos diferentes para se adaptar ao espaço, estrutura e objetivo do evento.</p>
+
+        <div class="grid grid-2">
+          <div class="card format-card">
+            <div class="icon">🎧</div>
+            <h3>Formato Acústico</h3>
+            <p>Ideal para bares menores, ambientes mais intimistas, programação de início de noite e espaços com estrutura reduzida.</p>
+            <ul class="bullet-list">
+              <li>Setup mais simples</li>
+              <li>Menor necessidade técnica</li>
+              <li>Clima próximo e nostálgico</li>
+            </ul>
+          </div>
+
+          <div class="card format-card">
+            <div class="icon">⚡</div>
+            <h3>Show Completo</h3>
+            <p>Ideal para casas maiores, pubs de rock, eventos temáticos e noites com foco em impacto, energia e permanência do público.</p>
+            <ul class="bullet-list">
+              <li>Maior presença de palco</li>
+              <li>Repertório intenso</li>
+              <li>Experiência completa de banda</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA: espaço para fotos reais -->
+    <section class="section">
+      <div class="container">
+        <div class="tag">Galeria</div>
+        <h2 class="section-title">Imagens que mostram a experiência ao vivo</h2>
+        <p class="section-subtitle">Substitua os arquivos na pasta assets pelas fotos reais da banda em palco, público, bares e bastidores.</p>
+
+        <div class="gallery">
+          <div class="gallery-item" aria-label="Foto PALIMP 1"></div>
+          <div class="gallery-item" aria-label="Foto PALIMP 2"></div>
+          <div class="gallery-item" aria-label="Foto PALIMP 3"></div>
+          <div class="gallery-item" aria-label="Foto PALIMP 4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL: fechamento com WhatsApp -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="cta-final">
+          <div class="tag">Agenda aberta</div>
+          <h2>Leve esse show para o seu espaço</h2>
+          <p>Contrate uma banda com repertório conhecido, energia ao vivo e uma proposta clara: fazer o público cantar junto do começo ao fim.</p>
+          <a class="btn" href="https://wa.me/5531973137876?text=Quero%20contratar%20a%20banda" target="_blank" rel="noopener">📩 Falar no WhatsApp</a>
+
+          <div class="contact-info">
+            <span>Telefone: +55 31 97313-7876</span>
+            <span>Instagram: @palimp_oficial</span>
+            <span>Belo Horizonte — MG</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      PALIMP • Mídia Kit Digital • Rock 90/2000 ao vivo
+    </div>
+  </footer>
+</body>
+</html>
 
