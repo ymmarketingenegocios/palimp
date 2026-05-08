@@ -24,25 +24,15 @@
       line-height: 1.6;
     }
 
-    img, iframe {
-      max-width: 100%;
-      display: block;
-    }
-
     a {
       color: inherit;
       text-decoration: none;
     }
 
     :root {
-      --bg: #050505;
-      --bg-soft: #101014;
-      --card: #16161d;
-      --text: #ffffff;
       --muted: #b8b8c7;
       --purple: #8b5cf6;
       --blue: #38bdf8;
-      --pink: #d946ef;
       --border: rgba(255,255,255,0.12);
     }
 
@@ -109,7 +99,6 @@
       box-shadow: none;
     }
 
-    /* Header */
     .header {
       position: fixed;
       top: 0;
@@ -151,7 +140,6 @@
       color: #fff;
     }
 
-    /* Hero */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -170,22 +158,22 @@
       position: absolute;
       inset: 0;
       background: url('assets/hero-palimp.jpg') center/cover no-repeat;
-      opacity: 0.24;
-      filter: grayscale(10%);
+      opacity: 0.28;
+      filter: grayscale(8%);
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(5,5,5,0.94) 0%, rgba(5,5,5,0.74) 48%, rgba(5,5,5,0.92) 100%);
+      background: linear-gradient(90deg, rgba(5,5,5,0.96) 0%, rgba(5,5,5,0.68) 48%, rgba(5,5,5,0.93) 100%);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 44px;
       align-items: center;
     }
@@ -218,33 +206,44 @@
       flex-wrap: wrap;
     }
 
-    .video-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 14px;
-      box-shadow: 0 25px 90px rgba(0,0,0,0.45);
-    }
-
-    .video-frame {
-      aspect-ratio: 16 / 9;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #000;
+    .hero-photo-grid {
       display: grid;
-      place-items: center;
-      color: var(--muted);
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.1);
+      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-rows: 240px 240px;
+      gap: 16px;
     }
 
-    .video-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .hero-photo {
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.38);
     }
 
-    /* Cards */
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
+    }
+
+    .hero-photo:nth-child(1) {
+      background-image: url('assets/topo-1.jpg');
+      grid-row: span 2;
+    }
+
+    .hero-photo:nth-child(2) {
+      background-image: url('assets/topo-2.jpg');
+    }
+
+    .hero-photo:nth-child(3) {
+      background-image: url('assets/topo-3.jpg');
+    }
+
     .grid {
       display: grid;
       gap: 22px;
@@ -278,6 +277,23 @@
       color: var(--muted);
     }
 
+    .photo-frame {
+      aspect-ratio: 16 / 10;
+      border-radius: 20px;
+      overflow: hidden;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 1px solid rgba(255,255,255,0.1);
+      min-height: 220px;
+    }
+
+    .proof-label {
+      margin-top: 12px;
+      font-weight: 800;
+      color: #fff;
+    }
+
     .icon {
       width: 52px;
       height: 52px;
@@ -287,16 +303,6 @@
       background: rgba(139, 92, 246, 0.16);
       font-size: 1.6rem;
       margin-bottom: 18px;
-    }
-
-    .proof .video-frame {
-      min-height: 190px;
-    }
-
-    .proof-label {
-      margin-top: 12px;
-      font-weight: 800;
-      color: #fff;
     }
 
     .about-wrap {
@@ -460,6 +466,15 @@
         grid-template-columns: 1fr;
       }
 
+      .hero-photo-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 260px);
+      }
+
+      .hero-photo:nth-child(1) {
+        grid-row: auto;
+      }
+
       .gallery {
         grid-template-columns: 1fr;
         grid-auto-rows: 260px;
@@ -479,12 +494,11 @@
 </head>
 
 <body>
-  <!-- Header fixo para facilitar navegação rápida -->
   <header class="header">
     <div class="container nav">
       <a href="#top" class="brand">PALIMP<span>.</span></a>
       <nav class="nav-links">
-        <a href="#prova">Vídeos</a>
+        <a href="#prova">Fotos</a>
         <a href="#show">O show</a>
         <a href="#formatos">Formatos</a>
         <a href="#contato">Contato</a>
@@ -494,7 +508,6 @@
   </header>
 
   <main id="top">
-    <!-- HERO: primeira dobra com foco em decisão rápida -->
     <section class="hero">
       <div class="container hero-content">
         <div>
@@ -503,52 +516,43 @@
           <p>Clássicos do rock alternativo e pop rock dos anos 90 e 2000 para lotar, engajar e manter o público no bar.</p>
           <div class="hero-actions">
             <a class="btn" href="https://wa.me/5531973137876?text=Quero%20contratar%20a%20banda" target="_blank" rel="noopener">📩 Contratar a banda</a>
-            <a class="btn secondary" href="#prova">🎥 Ver vídeos</a>
+            <a class="btn secondary" href="#prova">📸 Ver fotos</a>
           </div>
         </div>
 
-        <div class="video-card">
-          <div class="video-frame">
-            <!-- Troque VIDEO_ID pelo ID do vídeo do YouTube -->
-            <iframe src="https://www.youtube.com/watch?v=WGqDzEtYFxU&list=RDWGqDzEtYFxU&start_radio=1?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=1" title="Vídeo PALIMP ao vivo" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
+        <div class="hero-photo-grid">
+          <div class="hero-photo"></div>
+          <div class="hero-photo"></div>
+          <div class="hero-photo"></div>
         </div>
       </div>
     </section>
 
-    <!-- PROVA: seção mais importante para conversão -->
     <section class="section proof" id="prova">
       <div class="container">
-        <div class="tag">Prova em vídeo</div>
-        <h2 class="section-title">Veja o que acontece quando a banda sobe no palco</h2>
-        <p class="section-subtitle">Use esta seção para colocar os melhores cortes: público cantando, casa cheia, refrões conhecidos e momentos de alta energia.</p>
+        <div class="tag">Prova visual</div>
+        <h2 class="section-title">Veja a energia do PALIMP ao vivo</h2>
+        <p class="section-subtitle">Registros de palco, público, presença e atmosfera de show para mostrar que a banda funciona em bares, pubs e casas de show.</p>
 
         <div class="grid grid-3">
           <div class="card">
-            <div class="video-frame">
-              <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Público cantando" allowfullscreen></iframe>
-            </div>
-            <div class="proof-label">Público cantando junto</div>
+            <div class="photo-frame" style="background-image: url('assets/prova-1.jpg');"></div>
+            <div class="proof-label">Público conectado</div>
           </div>
 
           <div class="card">
-            <div class="video-frame">
-              <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Energia do show" allowfullscreen></iframe>
-            </div>
+            <div class="photo-frame" style="background-image: url('assets/prova-2.jpg');"></div>
             <div class="proof-label">Energia de palco</div>
           </div>
 
           <div class="card">
-            <div class="video-frame">
-              <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Casa cheia" allowfullscreen></iframe>
-            </div>
-            <div class="proof-label">Show em pub/casa de show</div>
+            <div class="photo-frame" style="background-image: url('assets/prova-3.jpg');"></div>
+            <div class="proof-label">Experiência ao vivo</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SOBRE O SHOW: texto curto, direto e vendedor -->
     <section class="section" id="show">
       <div class="container about-wrap">
         <div class="about-image" aria-label="PALIMP ao vivo"></div>
@@ -566,7 +570,6 @@
       </div>
     </section>
 
-    <!-- DIFERENCIAIS: visual e direto -->
     <section class="section">
       <div class="container">
         <div class="tag">Por que funciona no bar?</div>
@@ -598,7 +601,6 @@
       </div>
     </section>
 
-    <!-- PROVA SOCIAL: locais onde já tocaram -->
     <section class="section">
       <div class="container">
         <div class="tag">Prova social</div>
@@ -614,7 +616,6 @@
       </div>
     </section>
 
-    <!-- FORMATOS: ajuda a ampliar possibilidade de contratação -->
     <section class="section" id="formatos">
       <div class="container">
         <div class="tag">Formatos de contratação</div>
@@ -647,12 +648,11 @@
       </div>
     </section>
 
-    <!-- GALERIA: espaço para fotos reais -->
     <section class="section">
       <div class="container">
         <div class="tag">Galeria</div>
         <h2 class="section-title">Imagens que mostram a experiência ao vivo</h2>
-        <p class="section-subtitle">Substitua os arquivos na pasta assets pelas fotos reais da banda em palco, público, bares e bastidores.</p>
+        <p class="section-subtitle">Fotos de palco, público, bares, bastidores e momentos que traduzem a atmosfera do show.</p>
 
         <div class="gallery">
           <div class="gallery-item" aria-label="Foto PALIMP 1"></div>
@@ -663,7 +663,6 @@
       </div>
     </section>
 
-    <!-- CTA FINAL: fechamento com WhatsApp -->
     <section class="section" id="contato">
       <div class="container">
         <div class="cta-final">
